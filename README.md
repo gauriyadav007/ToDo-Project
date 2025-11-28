@@ -55,9 +55,9 @@ All operations use Django’s ORM.
 
 🛠 Tech Stack:
 Component	Technology:-
-Frontend:	HTML, CSS, JavaScript
-Backend:	Python, Django
-Database:	SQLite (default Django DB)
-Authentication:	Django Auth System
-ORM:	Django ORM
-Message Alerts:	Django Messages Framework
+Frontend:	HTML, CSS, JavaScript.
+Backend:	Python, Django.
+Database:	SQLite (default Django DB).
+Authentication:	Django Auth System.
+ORM:	Django ORM.
+Message Alerts:	Django Messages Framework.
