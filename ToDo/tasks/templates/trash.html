@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="trash-header">
+  <h2>Trash</h2>
+
+  <div class="trash-actions">
+    <form method="post" action="{% url 'restore_all' %}">
+      {% csrf_token %}
+      <button class="trash-btn" onclick="return confirmAction('Restore all tasks?');">Restore All</button>
+    </form>
+
+    <form method="post" action="{% url 'permanent_delete_all' %}">
+      {% csrf_token %}
+      <button class="trash-btn-danger" onclick="return confirmAction('Permanently delete ALL tasks?');">Delete All Permanently</button>
+    </form>
+  </div>
+</div>
+
+<div class="trash-card">
+  {% if deleted %}
+    {% for task in deleted %}
+
+      <div class="trash-task-row">
+        <div>
+          <div class="trash-task-title">{{ task.title }}</div>
+          <div class="trash-small">{{ task.description }}</div>
+        </div>
+
+        <div>
+          <form method="post" action="{% url 'restore_task' task.pk %}">
+            {% csrf_token %}
+            <button  class="trash-btn">Restore</button>
+          </form>
+
+          <form method="post" action="{% url 'permanent_delete' task.pk %}">
+            {% csrf_token %}
+            <button class="trash-btn-danger" onclick="return confirmAction('Permanently delete this task?');">Delete Permanently</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No items in trash.</p>
+  {% endif %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="about-container">
+    <h2 class="about-title">About This ToDo App</h2>
+
+    <p class="about-text">
+        This ToDo Application is designed to help users manage daily tasks efficiently.
+        It includes user authentication, task creation, updating, soft deletion, and a
+        powerful trash system where users can restore accidentally deleted tasks.
+    </p>
+
+    <div class="about-features">
+        <h3>✨ Key Features</h3>
+        <ul>
+            <li>User Registration & Login</li>
+            <li>Create, Read, Update & Delete Tasks</li>
+            <li>Soft Delete (Trash) to recover deleted items</li>
+            <li>Restore All / Delete All options</li>
+            <li>Fully responsive and user-friendly UI</li>
+        </ul>
+    </div>
+
+    <div class="about-footer-note">
+        Built using <strong>Django</strong>, <strong>HTML</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong>.
+    </div>
+</div>
+
+{% endblock content %}

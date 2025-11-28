@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="edit-profile-card">
+  <h3>Edit Profile</h3>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div class="edit-profile-form-group">
+      <label>Full Name</label>
+      <input type="text" name="full_name" value="{{ request.user.first_name }}">
+    </div>
+
+    <div class="edit-profile-form-group">
+      <label>Username</label>
+      {{ form.username }}
+    </div>
+
+    <div class="edit-profile-form-group">
+      <label>Email</label>
+      {{ form.email }}
+    </div>
+
+    <div class="edit-profile-form-group">
+      <label>Contact No</label>
+      {{ form.contact_no }}
+    </div>
+
+    <button type="submit">Save</button>
+    <button type="button"
+      onclick="if(confirm('Changes not saved, returning to profile.')) { 
+          window.location.href='{% url 'profile' %}';
+      }">
+    Cancel
+    </button>
+  </form>
+</div>
+
+<!-- Django messages for success/error -->
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      var popup_message = "{{ message }}";
+    </script>
+  {% endfor %}
+{% endif %}
+
+{% endblock content %}

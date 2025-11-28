@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+
+{% block title %}Home - ToDo{% endblock %}
+
+{% block content %}
+
+<div class="home">
+  <h2>My Tasks</h2>
+
+  <div>
+    <a href="{% url 'add_task' %}" class="home-button">Add Task</a>
+    <a href="{% url 'trash' %}" class="home-button">Trash</a>
+  </div>
+</div>
+
+<div class="home-card">
+  {% if tasks %}
+    {% for task in tasks %}
+
+      <div class="home-task-row">
+        <div>
+          <div class="home-task-title {% if task.is_completed %}completed{% endif %}">{{ task.title }}</div>
+          {% if task.description %}<div class="home-small">{{ task.description }}</div>{% endif %}
+          <div class="home-small">Created: {{ task.created_at|date:"M d, Y H:i" }}</div>
+        </div>
+
+        <div>
+          <a href="{% url 'update_task' task.pk %}">Edit</a>
+          <a href="{% url 'delete_task' task.pk %}" onclick="return confirmAction('Move this task to Trash?');">Delete</a>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No tasks yet. Click <a href="{% url 'add_task' %}">Add Task</a> to create one.</p>
+  {% endif %}
+</div>
+
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      var popup_message = "{{ message }}";
+    </script>
+  {% endfor %}
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="add-card">
+  <h3>Add Task</h3>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="add-form-group">
+      <label for="id_title">Title</label>
+      {{ form.title }}
+    </div>
+
+    <div class="add-form-group">
+      <label for="id_description">Description</label>
+      {{ form.description }}
+    </div>
+
+    <div class="add-form-group">
+      <label for="id_is_completed">Completed</label>
+      {{ form.is_completed }}
+    </div>
+
+    <button type="submit">Add</button>
+    <a href="{% url 'home' %}" 
+        class="add-btn-secondary"
+        onclick="return confirm('Changes not saved, returning to Home page.');">
+        Cancel
+    </a>
+  </form>
+</div>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="popup-message">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+
+{% endblock content %}

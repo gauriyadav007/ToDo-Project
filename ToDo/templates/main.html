@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{% block title %}ToDo Project{% endblock %}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+  {% include 'nav.html' %}
+  
+  <div class="container">
+    {% block content %}{% endblock %}
+    <div class="footer small">ToDo Project • Built with Django</div>
+  </div>
+
+  <!-- Popup Messages -->
+  {% if messages %}
+  <div id="popupBox">
+      {% for m in messages %}
+          <div class="popup-message">{{ m }}</div>
+      {% endfor %}
+  </div>
+{% endif %}
+
+  <!-- small JS for popups & confirmations -->
+  <script>
+    // fade-out popup after few seconds
+    setTimeout(() => {
+        const box = document.getElementById("popupBox");
+        if (box) {
+            box.style.transition = "0.6s ease";
+            box.style.opacity = "0";
+            setTimeout(() => box.remove(), 700);
+        }
+    }, 2200);
+
+    function confirmAction(msg) {
+      return confirm(msg || 'Are you sure?');
+    }
+  </script>
+  {% block extra_js %}{% endblock %}
+
+</body>
+</html>
